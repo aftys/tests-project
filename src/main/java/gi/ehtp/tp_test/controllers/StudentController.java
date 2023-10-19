@@ -3,6 +3,8 @@ package gi.ehtp.tp_test.controllers;
 import gi.ehtp.tp_test.entities.Student;
 import gi.ehtp.tp_test.services.StudentService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,13 +22,15 @@ public class StudentController {
     }
 
     @PostMapping
-    public void addStudent(@RequestBody Student student) {
+    public ResponseEntity<Student> addStudent(@RequestBody Student student) {
         studentService.addStudent(student);
+        return new ResponseEntity<>(student, HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "{studentId}")
-    public void deleteStudent(
+    public ResponseEntity<Long>  deleteStudent(
             @PathVariable("studentId") Long studentId) {
-        studentService.deleteStudent(studentId);
+           studentService.deleteStudent(studentId);
+        return new ResponseEntity<>(studentId, HttpStatus.NO_CONTENT);
     }
 }
