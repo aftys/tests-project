@@ -22,12 +22,12 @@ public class Student {
     @GeneratedValue(
             generator = "student_sequence",
             strategy = GenerationType.SEQUENCE)
+
     private Long id;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false, unique = true)
     private String email;
-
 
     public Student(String name, String email) {
         this.name = name;
